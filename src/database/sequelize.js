@@ -1,20 +1,13 @@
+const { DOUBLE } = require('sequelize');
 const { Sequelize } = require('sequelize');
+const config = require('../../config/database');
+const db = {};
 
-module.exports = new Sequelize(
-  'test-node',
-  'postgres',
-  '',
-  {
-    host: 'localhost',
-    dialect: 'postgres',
-    pool:{
-      max: 5,
-      min: 0,
-      acquire: 30000,
-      idle: 10000
-    },
-    logging: false
-  }
+const sequelize = new Sequelize(
+  config.database,
+  config.username,
+  config.password, 
+  config
 );
 
 // try {
@@ -23,3 +16,5 @@ module.exports = new Sequelize(
 // } catch (error) {
 //   console.error('Unable to connect to the database:', error);
 // }
+
+module.exports = sequelize;

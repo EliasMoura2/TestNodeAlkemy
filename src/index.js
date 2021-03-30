@@ -1,13 +1,22 @@
-
+// if(process.env.NODE_ENV !== 'production'){
+  require('dotenv').config();
+// }
+const { sequelize } = require('./models/index');
 const app = require('./app');
 
-app.set('port', process.env.PORT || 5000);
-
-const port = app.get('port');
+const PORT = process.env.PORT || 3000;
 
 const init = async() => {
-  await app.listen(port, () => {
-    console.log(`server listening on port = ${port}`);
+  await app.listen(PORT, () => {
+    console.log(`server listening on port = ${PORT}`);
+    // connection.sync({ force: true})
+    //   .then(() => console.log('Connection has been established successfully'))
+    try {
+      sequelize.authenticate();
+      console.log('Connection has been established successfully.');
+    } catch (error) {
+      console.error('Unable to connect to the database:', error);
+    }
   })
 }
 
