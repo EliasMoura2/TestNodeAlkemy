@@ -1,35 +1,43 @@
 'use strict';
 // const { DataTypes } = require('sequelize');
 // const sequelize = require('../database/sequelize');
-
 const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
-  
-  class User extends Model {
+  class Movie extends Model {
+
     static associate(models) {
       // define association here
     }
   };
-
-  User.init({
-    username: {
+  Movie.init({
+    image: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    password: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
+    released: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    rating: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    genre: {
       type: DataTypes.STRING,
       allowNull: false,
-    }
+    },
   }, {
     sequelize,
-    modelName: 'User',
-    tableName: 'users'
+    modelName: 'Movie',
+    tableName: 'movies',
+    // timestamps: false
   });
 
-  return User;
+  // console.log(Movie === sequelize.models.Movie); // true
+  return Movie;
 };
-// module.exports = User;

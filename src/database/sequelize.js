@@ -1,5 +1,5 @@
-const { DOUBLE } = require('sequelize');
-const { Sequelize } = require('sequelize');
+
+const { Sequelize, DataTypes} = require('sequelize');
 const config = require('../../config/database');
 const db = {};
 
@@ -16,5 +16,8 @@ const sequelize = new Sequelize(
 // } catch (error) {
 //   console.error('Unable to connect to the database:', error);
 // }
+
+// sequelize.User = require('../models/User')(sequelize, DataTypes)
+
 
 module.exports = sequelize;
