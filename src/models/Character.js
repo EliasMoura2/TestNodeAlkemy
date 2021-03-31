@@ -10,10 +10,15 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       // Movie.hasMany(models.Character,{ foreignKey: 'movieId', sourceKey: 'id'});
-      Character.belongsTo(models.Movie, { foreignKey: 'movieId', sourceKey: 'id'});
+      // Character.hasOne(models.Movie);
     }
   };
   Character.init({
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     image: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -27,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     weight: {
-      type: DataTypes.FLOAT(2),
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
     history: {
@@ -41,6 +46,6 @@ module.exports = (sequelize, DataTypes) => {
     // timestamps: false
   });
 
-  console.log(Character === sequelize.models.Character); // true
+  // console.log(Character === sequelize.models.Character); // true
   return Character;
 };

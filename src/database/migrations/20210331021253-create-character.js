@@ -18,10 +18,18 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       weight: {
-        type: Sequelize.FLOAT(2)
+        type: Sequelize.FLOAT
       },
       history: {
         type: Sequelize.TEXT
+      },
+      movieId:{
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'movies',
+          key: 'id',
+        },
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,

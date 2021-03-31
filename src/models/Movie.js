@@ -8,9 +8,15 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
+      Movie.hasMany(models.Character)
     }
   };
   Movie.init({
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     image: {
       type: DataTypes.STRING,
       allowNull: false,
