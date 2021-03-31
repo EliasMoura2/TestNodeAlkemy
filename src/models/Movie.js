@@ -8,22 +8,25 @@ const Movie = sequelize.define('Chracter', {
     type: DataTypes.INTEGER,
     primarykey: true
   },
-  imagePath: {
+  image: {
     type: DataTypes.STRING,
+    allowNull: false
   },
   title: {
     type: DataTypes.STRING,
     allowNull: false
   },
   released: {
-    type: DataTypes.DATE
-    // allowNull defaults to true
+    type: DataTypes.DATE,
+    allowNull: false
   },
   rating:{
-    type: DataTypes.REAL
+    type: DataTypes.INTEGER,
+    allowNull: false
   },
   genre: {
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    allowNull: false
   }
 }, {
   // Other model options go here

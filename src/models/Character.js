@@ -7,22 +7,25 @@ const User = sequelize.define('Chracter', {
     type: DataTypes.INTEGER,
     primarykey: true
   },
-  imagePath: {
+  image: {
     type: DataTypes.STRING,
+    allowNull: false,
   },
   fullName: {
     type: DataTypes.STRING,
     allowNull: false
   },
   age: {
-    type: DataTypes.DATE
-    // allowNull defaults to true
+    type: DataTypes.INTEGER,
+    allowNull: false,
   },
   weight:{
-    type: DataTypes.REAL
+    type: DataTypes.FLOAT(2),
+    allowNull: false,
   },
   history: {
-    type: DataTypes.TEXT
+    type: DataTypes.TEXT,
+    allowNull: false,
   },
   movieId: {
     type: DataTypes.INTEGER
