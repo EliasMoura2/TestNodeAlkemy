@@ -11,12 +11,14 @@ const init = async() => {
     console.log(`server listening on port = ${PORT}`);
     // connection.sync({ force: true})
     //   .then(() => console.log('Connection has been established successfully'))
-    try {
-      sequelize.authenticate();
-      console.log('Connection has been established successfully.');
-    } catch (error) {
-      console.error('Unable to connect to the database:', error);
-    }
+    // try {
+    //   sequelize.authenticate();
+    //   console.log('Connection has been established successfully.');
+    // } catch (error) {
+    //   console.error('Unable to connect to the database:', error);
+    // }
+    sequelize.sync({force: true})
+      .then(() => console.log('Connection has been established successfully'))
   })
 }
 

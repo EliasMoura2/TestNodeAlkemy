@@ -1,11 +1,13 @@
-const Character = require('../models/Character');
+const { Character } = require('../models/index');
 
 module.exports = {
   list: async (req, res) => {
     res.send('list all characters');
   },
   new: async (req, res) => {
-    res.send('new character')
+    // const jane = await User.create({ firstName: "Jane", lastName: "Doe" });
+    // console.log("Jane's auto-generated ID:", jane.id);
+    res.send('new character');
   },
   edit: async (req, res) => {
     res.send('edit a character')

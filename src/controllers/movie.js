@@ -1,11 +1,19 @@
-const Movie = require('../models/Movie');
+const { Movie } = require('../models/index');
 
 module.exports = {
   list: async (req, res) => {
-    res.send('list all movies');
+    let movies = await Movie.finAll({})
+    // res.send('list all movies');
+    res.stauts(200).json({message: 'All movies', movies})
   },
   new: async (req, res) => {
-    res.send('new movie')
+    try {
+      const { image, title, released, rating, genre } = req.body;
+      // await Movie.create({ image, title, released, rating, genre });
+      res.status(203).json({message: 'Movie created successfully'});
+    } catch (error) {
+      console.log(error.message)
+    }
   },
   edit: async (req, res) => {
     res.send('edit a movie')

@@ -4,8 +4,20 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
-const sequelize = require('../database/sequelize');
+// const sequelize = require('../database/sequelize');
+
+//configuration
+const config = require('../../config/database');
+
 const db = {};
+
+// Initialization
+const sequelize = new Sequelize(
+  config.database,
+  config.username,
+  config.password, 
+  config
+);
 
 // asociaciones y vinculaciones de los modelos
 fs

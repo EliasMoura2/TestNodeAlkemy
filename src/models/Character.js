@@ -38,7 +38,15 @@ module.exports = (sequelize, DataTypes) => {
     history: {
       type: DataTypes.TEXT,
       allowNull: false,
-    }
+    },
+    movieId:{
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'movies',
+        key: 'id',
+      },
+      onDelete: 'CASCADE'
+    },
   }, {
     sequelize,
     modelName: 'Character',

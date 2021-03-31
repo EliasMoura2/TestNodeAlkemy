@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
 // Routes
-// app.use('/api', routes)
+app.use('/api', routes)
 app.get('/', (req, res) => {
   res.send('Hello world')
 })
