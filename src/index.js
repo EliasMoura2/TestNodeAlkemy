@@ -17,7 +17,7 @@ const init = async() => {
     // } catch (error) {
     //   console.error('Unable to connect to the database:', error);
     // }
-    sequelize.sync({force: true})
+    sequelize.sync({force: false})
       .then(() => console.log('Connection has been established successfully'))
   })
 }

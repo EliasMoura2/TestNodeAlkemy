@@ -31,7 +31,7 @@ const upload = multer({
 router.get('/', movieCtrl.list);
 router.get('/:id', movieCtrl.detail);
 router.post('/', upload, movieCtrl.new);
-router.patch('/:id', upload, movieCtrl.edit);
+router.put('/:id', upload, movieCtrl.edit);
 router.delete('/:id', movieCtrl.delete);
 router.get('/:name/:filter', movieCtrl.search);
 

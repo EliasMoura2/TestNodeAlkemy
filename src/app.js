@@ -14,7 +14,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
 // Statics file
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 // Routes
 app.use('/api', routes)
