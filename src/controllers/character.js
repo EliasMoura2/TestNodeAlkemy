@@ -2,6 +2,7 @@ const { Character } = require('../models/index');
 
 module.exports = {
   list: async (req, res) => {
+    
     res.send('list all characters');
   },
   new: async (req, res) => {

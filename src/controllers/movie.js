@@ -2,9 +2,12 @@ const { Movie } = require('../models/index');
 
 module.exports = {
   list: async (req, res) => {
-    let movies = await Movie.finAll({})
+    let movies = await Movie.findAll({})
+    // Model.findAll({
+    //   attributes: ['foo', 'bar']
+    // });
     // res.send('list all movies');
-    res.stauts(200).json({message: 'All movies', movies})
+    res.status(200).json({message: 'All movies', movies})
   },
   new: async (req, res) => {
     try {

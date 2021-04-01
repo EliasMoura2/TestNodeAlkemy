@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   Movie.init({
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },

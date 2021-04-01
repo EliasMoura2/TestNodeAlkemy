@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   Character.init({
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
