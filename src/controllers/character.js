@@ -1,12 +1,14 @@
 const { Character } = require('../models/index');
+const { unlink } = require('fs-extra');
+const path = require('path');
 
 module.exports = {
   list: async (req, res) => {
     try {
       let characters = await Character.findAll({
-        attributes: ['image', 'name']
+        // attributes: ['image', 'name']
       });
-      res.status(200).json({characters})
+      res.status(200).json(characters)
     } catch (error) {
       console.log(error.message);
       res.status(500).json({message: 'Something goes wrong'})
@@ -23,9 +25,10 @@ module.exports = {
       character.history = history;
       character.movieId = movieId;
 
+      // console.log(character)
       // const newCharacter = 
       await Character.create(character.dataValues);
-      // console.log(newMovie);
+      // console.log(newCharacter);
       res.status(201).json({message: 'Character created successfully'});
     } catch (error) {
       console.log(error.message);
@@ -69,12 +72,41 @@ module.exports = {
     }
   },
   delete: async (req, res) => {
-    res.send('delete a character')
+    try {
+      const { id } = req.params
+      let character = await Character.findOne({
+        where: {
+          id
+        }
+      })
+
+      let isDeleted = await Character.destroy({
+        where: {
+          id
+        }
+      })
+      if(isDeleted){
+        unlink(path.resolve('./src/public' + character.image))
+        res.status(200).json({message: 'Character deleted successfully'});
+      }else{
+        res.status(400).json({message: 'incorrect id'});
+      }
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).json({message: 'Something goes wrong'})
+    }
   },
   detail: async (req, res) => {
     res.send('character details')
   },
   search: async (req, res) => {
-    res.send('search a character')
+    // try {
+    //   let character = await Character.findAll({ include: Movie });
+    //   res.json(character)
+    // } catch (error) {
+    //   console.log(error.message);
+    //   res.status(500).json({message: 'Something goes wrong'});
+    // }
+    // res.send('search a character')
   }
 }

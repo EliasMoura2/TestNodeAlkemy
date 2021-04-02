@@ -6,9 +6,9 @@ module.exports = {
   list: async (req, res) => {
     try {
       let movies = await Movie.findAll({
-        attributes: ['image', 'title', 'released']
+        // attributes: ['image', 'title', 'released']
       });
-      res.status(200).json({movies})
+      res.status(200).json(movies)
     } catch (error) {
       console.log(error.message);
       res.status(500).json({message: 'Something goes wrong'})
@@ -61,7 +61,7 @@ module.exports = {
         unlink(path.resolve('./src/public' + movie.image))
         res.status(200).json({message: 'Movie update successfully'});
       }else{
-        res.status(400).json({message: 'incorrect id'});
+        res.status(500).json({message: 'incorrect id'});
       }
     } catch (error) {
       console.log(error.message);
@@ -94,9 +94,29 @@ module.exports = {
     }
   },
   detail: async (req, res) => {
-    res.send('movie details')
+    try {
+      const { id } = req.params
+      let movie = await Movie.findOne({
+        where: {
+          id
+        }
+      })
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).json({message: 'Something goes wrong'});
+    }
   },
   search: async (req, res) => {
-    res.send('search a movie')
+    // try {
+    //   let movie = await Movie.findAll();
+    //   // console.log(movie)
+    //   res.json(movie)
+    // } catch (error) {
+    //   console.log(error.message);
+    //   res.status(500).json({message: 'Something goes wrong'});
+    // }
+    // description: {
+    //   [Op.like]: '%boat%'
+    // }
   }
 }

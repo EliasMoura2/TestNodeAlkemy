@@ -33,6 +33,6 @@ router.get('/:id', movieCtrl.detail);
 router.post('/', upload, movieCtrl.new);
 router.put('/:id', upload, movieCtrl.edit);
 router.delete('/:id', movieCtrl.delete);
-router.get('/:name/:filter', movieCtrl.search);
+router.get('/prueba/:id', movieCtrl.search);
 
 module.exports = router;

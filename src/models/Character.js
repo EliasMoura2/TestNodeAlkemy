@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       // Movie.hasMany(models.Character,{ foreignKey: 'movieId', sourceKey: 'id'});
-      // Character.hasOne(models.Movie);
+      // Character.belongsTo(models.Movie);
     }
   };
   Character.init({
@@ -46,7 +46,7 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id',
       },
       onDelete: 'CASCADE'
-    },
+    }
   }, {
     sequelize,
     modelName: 'Character',
