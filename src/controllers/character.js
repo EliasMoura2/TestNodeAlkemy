@@ -1,4 +1,5 @@
 const { Character, Movie } = require('../models/index');
+const { Op } = require("sequelize");
 const { unlink } = require('fs-extra');
 const path = require('path');
 
@@ -116,13 +117,61 @@ module.exports = {
     }
   },
   search: async (req, res) => {
-    // try {
-    //   let character = await Character.findAll({ include: Movie });
-    //   res.json(character)
-    // } catch (error) {
-    //   console.log(error.message);
-    //   res.status(500).json({message: 'Something goes wrong'});
-    // }
-    // res.send('search a character')
+    try {
+      let { name } = req.params;
+      let { age, weight, movie } = req.query;
+      // console.log(name, age, weight, movie);
+      if(age){
+        let characters = await Character.findAll({
+          include: {
+            model: Movie,
+            as: 'pelicula',
+            attributes: ['id','image','title','released', 'rating','genre']
+          },
+          where:{
+            name,
+            age: {
+              [Op.eq]: age
+            }
+          }
+        });
+        res.status(200).json(characters);
+      }
+
+      if(movie){
+        let characters = await Character.findAll({
+          include: {
+            model: Movie,
+            as: 'pelicula',
+            attributes: ['id','image','title','released', 'rating','genre']
+          },
+          where:{
+            name
+          }
+        });
+        let newCharacters = characters.filter( character => character.dataValues.pelicula.dataValues.title === movie);
+        res.status(200).json(newCharacters)
+      }
+
+      if(weight){
+        let characters = await Character.findAll({
+          include: {
+            model: Movie,
+            as: 'pelicula',
+            attributes: ['id','image','title','released', 'rating','genre']
+          },
+          where:{
+            name,
+            weight: {
+              [Op.eq]: weight
+            }
+          }
+        });
+        res.status(200).json(characters);
+      }
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).json({message: 'Something goes wrong'});
+    }
   }
 }

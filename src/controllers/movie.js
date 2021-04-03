@@ -103,8 +103,7 @@ module.exports = {
           },
           include: {
             model: Character,
-            as: 'personaje',
-            attributes: ['id','image','name', 'age','weight', 'history']
+            as: 'personaje'
           }
         });
         res.status(200).json(movie);

@@ -33,6 +33,6 @@ router.get('/:id', characterCtrl.detail);
 router.post('/', upload, characterCtrl.new);
 router.patch('/:id', upload, characterCtrl.edit);
 router.delete('/:id', characterCtrl.delete);
-router.get('/prueba/:id', characterCtrl.search);
+router.get('/name/:name', characterCtrl.search);
 
 module.exports = router;
