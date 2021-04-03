@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       // Movie.hasMany(models.Character,{ foreignKey: 'movieId', sourceKey: 'id'});
-      // Character.belongsTo(models.Movie);
+      Character.belongsTo(models.Movie, {as: 'pelicula', foreignKey: "movieId"});
     }
   };
   Character.init({
@@ -57,3 +57,18 @@ module.exports = (sequelize, DataTypes) => {
   // console.log(Character === sequelize.models.Character); // true
   return Character;
 };
+
+
+// const { Model, DataTypes } = require('sequelize');
+// const sequelize = require('../database/sequelize');
+
+// class User extends Model{}
+// User.init({
+//   name: DataTypes.STRING,
+//   birthday: DataTypes.DATE
+// },{
+//   sequelize,
+//   modelName: 'user'
+// })
+
+// module.exports = User;

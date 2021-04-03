@@ -1,4 +1,4 @@
-const { Character } = require('../models/index');
+const { Character, Movie } = require('../models/index');
 const { unlink } = require('fs-extra');
 const path = require('path');
 
@@ -6,7 +6,7 @@ module.exports = {
   list: async (req, res) => {
     try {
       let characters = await Character.findAll({
-        // attributes: ['image', 'name']
+        attributes: ['image', 'name']
       });
       res.status(200).json(characters)
     } catch (error) {
@@ -97,7 +97,23 @@ module.exports = {
     }
   },
   detail: async (req, res) => {
-    res.send('character details')
+    try {
+      const { id } = req.params
+      let character = await Character.findOne({
+        where: {
+          id
+        },
+        include: {
+          model: Movie,
+          as: 'pelicula',
+          attributes: ['id','image','title','released', 'rating','genre']
+        }
+      });
+      res.status(200).json(character);
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).json({message: 'Something goes wrong'});
+    }
   },
   search: async (req, res) => {
     // try {
