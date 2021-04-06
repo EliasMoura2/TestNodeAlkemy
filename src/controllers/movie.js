@@ -34,7 +34,7 @@ module.exports = {
         console.log(error.message);
         res.status(500).json({message: 'Something goes wrong'})
       }
-    },
+  },
   edit: async (req, res) => {
       try {
         const { title, released, rating, genre } = req.body;

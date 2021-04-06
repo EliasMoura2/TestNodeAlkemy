@@ -121,6 +121,7 @@ module.exports = {
       let { name } = req.params;
       let { age, weight, movie } = req.query;
       // console.log(name, age, weight, movie);
+      
       if(age){
         let characters = await Character.findAll({
           include: {
@@ -130,7 +131,7 @@ module.exports = {
           },
           where:{
             name: {
-              [Op.like]: `${name}`
+              [Op.like]: `%${name}%`
             },
             age: {
               [Op.eq]: age
@@ -149,7 +150,7 @@ module.exports = {
           },
           where:{
             name: {
-              [Op.like]: `${name}`
+              [Op.like]: `%${name}%`
             }
           }
         });
@@ -166,7 +167,7 @@ module.exports = {
           },
           where:{
             name: {
-              [Op.like]: `${name}`
+              [Op.like]: `%${name}%`
             },
             weight: {
               [Op.eq]: weight
