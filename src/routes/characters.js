@@ -3,6 +3,7 @@ const characterCtrl = require('../controllers/character');
 const multer = require('multer');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
+const verifyToken = require('../middlewares/verifyToken');
 
 const router = Router();
 
@@ -28,11 +29,11 @@ const upload = multer({
   }
 }).single('image');
 
-router.get('/', characterCtrl.list);
-router.get('/:id', characterCtrl.detail);
-router.post('/', upload, characterCtrl.new);
-router.patch('/:id', upload, characterCtrl.edit);
-router.delete('/:id', characterCtrl.delete);
-router.get('/name/:name', characterCtrl.search);
+router.get('/', verifyToken, characterCtrl.list);
+router.get('/:id', verifyToken, characterCtrl.detail);
+router.post('/', [verifyToken, upload], characterCtrl.new);
+router.put('/:id', [verifyToken, upload], characterCtrl.edit);
+router.delete('/:id', verifyToken, characterCtrl.delete);
+router.get('/search/:name', verifyToken, characterCtrl.search);
 
 module.exports = router;

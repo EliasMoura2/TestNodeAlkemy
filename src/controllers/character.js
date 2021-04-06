@@ -129,7 +129,9 @@ module.exports = {
             attributes: ['id','image','title','released', 'rating','genre']
           },
           where:{
-            name,
+            name: {
+              [Op.like]: `${name}`
+            },
             age: {
               [Op.eq]: age
             }
@@ -146,7 +148,9 @@ module.exports = {
             attributes: ['id','image','title','released', 'rating','genre']
           },
           where:{
-            name
+            name: {
+              [Op.like]: `${name}`
+            }
           }
         });
         let newCharacters = characters.filter( character => character.dataValues.pelicula.dataValues.title === movie);
@@ -161,7 +165,9 @@ module.exports = {
             attributes: ['id','image','title','released', 'rating','genre']
           },
           where:{
-            name,
+            name: {
+              [Op.like]: `${name}`
+            },
             weight: {
               [Op.eq]: weight
             }

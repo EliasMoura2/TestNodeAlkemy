@@ -113,16 +113,81 @@ module.exports = {
       }
   },
   search: async (req, res) => {
-      // try {
-      //   let movie = await Movie.findAll();
-      //   // console.log(movie)
-      //   res.json(movie)
-      // } catch (error) {
-      //   console.log(error.message);
-      //   res.status(500).json({message: 'Something goes wrong'});
-      // }
-      // description: {
-      //   [Op.like]: '%boat%'
-      // }
+    try {
+      let { title } = req.params;
+      let { genre, sort } = req.query;
+      if(genre){
+        if(sort === 'ASC' || sort === 'DESC'){
+          let movies = await Movie.findAll({
+            include: {
+              model: Character,
+              as: 'personaje'
+            },
+            where:{
+              title: {
+                [Op.like]: `${title}`
+              },
+              genre: {
+                [Op.like]: `${genre}`
+              }
+            },
+            order: [
+              ['released', `${sort}`],
+            ]
+          });
+          res.status(200).json(movies);
+        } else {
+          let movies = await Movie.findAll({
+            include: {
+              model: Character,
+              as: 'personaje'
+            },
+            where:{
+              title: {
+                [Op.like]: `${title}`
+              },
+              genre: {
+                [Op.like]: `${genre}`
+              }
+            }
+          });
+          res.status(200).json(movies);
+        }
+      } else{
+        if(sort === 'ASC' || sort === 'DESC'){
+          let movies = await Movie.findAll({
+            include: {
+              model: Character,
+              as: 'personaje'
+            },
+            where:{
+              title: {
+                [Op.like]: `${title}`
+              }
+            },
+            order: [
+              ['released', `${sort}`],
+            ]
+          });
+          res.status(200).json(movies);
+        } else {
+          let movies = await Movie.findAll({
+            include: {
+              model: Character,
+              as: 'personaje'
+            },
+            where:{
+              title: {
+                [Op.like]: `${title}`
+              }
+            }
+          });
+          res.status(200).json(movies);
+        }
+      }
+    } catch (error) {
+      console.log(error.message);
+      res.status(500).json({message: 'Something goes wrong'});
+    }
   }
 }

@@ -3,6 +3,7 @@ const movieCtrl = require('../controllers/movie');
 const multer = require('multer');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
+const verifyToken = require('../middlewares/verifyToken');
 
 const router = Router();
 
@@ -28,11 +29,11 @@ const upload = multer({
   }
 }).single('image');
 
-router.get('/', movieCtrl.list);
-router.get('/:id', movieCtrl.detail);
-router.post('/', upload, movieCtrl.new);
-router.put('/:id', upload, movieCtrl.edit);
-router.delete('/:id', movieCtrl.delete);
-router.get('/prueba/:id', movieCtrl.search);
+router.get('/', verifyToken, movieCtrl.list);
+router.get('/:id', verifyToken, movieCtrl.detail);
+router.post('/', [verifyToken, upload], movieCtrl.new);
+router.put('/:id', [verifyToken, upload], movieCtrl.edit);
+router.delete('/:id', verifyToken, movieCtrl.delete);
+router.get('/search/:title', verifyToken, movieCtrl.search);
 
 module.exports = router;
