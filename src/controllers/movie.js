@@ -1,5 +1,6 @@
 // const { Movie } = require('../models/index');
-const { Movie, Character } = require('../models/index')
+const { Movie, Character } = require('../models/index');
+const { Op } = require("sequelize");
 const { unlink } = require('fs-extra');
 const path = require('path');
 
@@ -116,19 +117,21 @@ module.exports = {
     try {
       let { title } = req.params;
       let { genre, sort } = req.query;
+      sort = sort.toUpperCase();
       if(genre){
         if(sort === 'ASC' || sort === 'DESC'){
           let movies = await Movie.findAll({
             include: {
               model: Character,
-              as: 'personaje'
+              as: 'personaje',
+              attributes: ['id','name','image']
             },
             where:{
               title: {
-                [Op.like]: `${title}`
+                [Op.like]: `%${title}%`
               },
               genre: {
-                [Op.like]: `${genre}`
+                [Op.like]: `%${genre}%`
               }
             },
             order: [
@@ -140,14 +143,15 @@ module.exports = {
           let movies = await Movie.findAll({
             include: {
               model: Character,
-              as: 'personaje'
+              as: 'personaje',
+              attributes: ['id','name','image']
             },
             where:{
               title: {
-                [Op.like]: `${title}`
+                [Op.like]: `%${title}%`
               },
               genre: {
-                [Op.like]: `${genre}`
+                [Op.like]: `%${genre}%`
               }
             }
           });
@@ -158,11 +162,12 @@ module.exports = {
           let movies = await Movie.findAll({
             include: {
               model: Character,
-              as: 'personaje'
+              as: 'personaje',
+              attributes: ['id','name','image']
             },
             where:{
               title: {
-                [Op.like]: `${title}`
+                [Op.like]: `%${title}%`
               }
             },
             order: [
@@ -174,11 +179,12 @@ module.exports = {
           let movies = await Movie.findAll({
             include: {
               model: Character,
-              as: 'personaje'
+              as: 'personaje',
+              attributes: ['id','name','image']
             },
             where:{
               title: {
-                [Op.like]: `${title}`
+                [Op.like]: `%${title}%`
               }
             }
           });
