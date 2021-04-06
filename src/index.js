@@ -1,20 +1,17 @@
-
+if(process.env.NODE_ENV !== 'production'){
+  require('dotenv').config();
+}
+const { sequelize } = require('./models/index');
 const app = require('./app');
 
-app.set('port', process.env.PORT || 5000);
-
-const port = app.get('port');
+const PORT = process.env.PORT || 3000;
 
 const init = async() => {
-  await app.listen(port, () => {
-    console.log(`server listening on port = ${port}`);
+  await app.listen(PORT, () => {
+    console.log(`server listening on port = ${PORT}`);
+    sequelize.sync({force: true})
+      .then(() => console.log('Connection has been established successfully'))
   })
 }
 
 init();
-
-// process.on('SIGINT', () => {
-//   console.log('Server closed');
-//   debug.close();
-//   process.exit();
-// })
