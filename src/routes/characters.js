@@ -30,8 +30,8 @@ const upload = multer({
 
 router.get('/', verifyToken, characterCtrl.list);
 router.get('/:id', verifyToken, characterCtrl.detail);
-router.post('/', [verifyToken, upload], characterCtrl.new);
-router.put('/:id', [verifyToken, upload], characterCtrl.edit);
+router.post('/', [verifyToken, upload, characterCtrl.new]);
+router.put('/:id', [verifyToken, upload , characterCtrl.edit]);
 router.delete('/:id', verifyToken, characterCtrl.delete);
 router.get('/search/:name', verifyToken, characterCtrl.search);
 
