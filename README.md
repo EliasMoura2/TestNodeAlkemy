@@ -8,19 +8,16 @@ git clone https://github.com/EliasMoura2/TestNodeAlkemy.git
 ```
 cd TestNodeAlkemy && npm i
 ```
-
-## Create database
+## Run seeds
+```
+npx sequelize-cli db:seed:all
+```
 
 ## Run project
 ```
 npm run dev
 ```
-
-## Run seeds
+## Request Postman
 ```
-npx sequelize-cli db:seed:all
-```
-## Delete data db
-```
-npx sequelize-cli db:seed:undo --seed 20210407135851-create-users
+http://localhost:5000/api/
 ```
