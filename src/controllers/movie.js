@@ -115,9 +115,9 @@ module.exports = {
     try {
       let { title } = req.params;
       let { genre, sort } = req.query;
-      sort = sort.toUpperCase();
       if(genre){
         if(sort === 'ASC' || sort === 'DESC'){
+          sort = sort.toUpperCase();
           let movies = await Movie.findAll({
             include: {
               model: Character,
@@ -157,6 +157,7 @@ module.exports = {
         }
       } else{
         if(sort === 'ASC' || sort === 'DESC'){
+          sort = sort.toUpperCase();
           let movies = await Movie.findAll({
             include: {
               model: Character,
