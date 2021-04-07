@@ -23,7 +23,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate:{
-        isAlphanumeric: true,
         notNull: {
           args: true,
           msg: 'title cannot be null'

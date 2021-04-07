@@ -22,7 +22,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate:{
-        isAlphanumeric: true,
         len: {
           args: [3,50],
           msg: 'Must be between 3 and 50 characters long'
