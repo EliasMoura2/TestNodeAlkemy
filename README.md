@@ -1,5 +1,14 @@
 # TestNodeAlkemy
 
+## clone project
+```
+git clone https://github.com/EliasMoura2/TestNodeAlkemy.git
+```
+## Install dependecies
+```
+cd TestNodeAlkemy && npm i
+```
+
 ## Create database
 
 ## Run project
